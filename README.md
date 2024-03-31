@@ -28,9 +28,10 @@ yarn install
 yarn watch
 ```
 
-## 5) Install webpack
+## 5) Install Turbo
 ```
-composer require encore:^1.14
+composer require symfony/ux-turbo:^1.3
+yarn install
 ```
 
 
