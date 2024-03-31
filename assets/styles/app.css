@@ -6,6 +6,12 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
+
+/* When using turbo snapshot, the class "data-turbo-preview" appears on the html tag briefly before the page is fully loaded (while the snapshot is loaded) */
+[data-turbo-preview] body {
+    opacity: 0.2;
+}
+
 a, a:hover  {
     color: #000;
 }

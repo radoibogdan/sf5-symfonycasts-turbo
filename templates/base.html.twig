@@ -2,6 +2,11 @@
 <html lang="en-US">
     <head>
         <meta charset="UTF-8">
+
+        {% block metas %}
+            {# In inherited templates used to disable snapshots #}
+        {% endblock %}
+
         <title>{% block title %}MVP Office Supplies{% endblock %}</title>
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}

@@ -2,6 +2,15 @@
 
 {% block title %}Register{% endblock %}
 
+{% block metas %}
+    {# Content options for preview/snapshot:
+        no-preview = don't show the snapshot for this page (Back button will use the snapshot to show errors on the form)
+        no-cache   = don't show the snapshot even for the Back button
+    #}
+    <meta name="turbo-cache-control" content="no-preview">
+{% endblock %}
+
+
 {% block body %}
     <div class="container" style="margin-top: 100px;">
         <div class="row">
