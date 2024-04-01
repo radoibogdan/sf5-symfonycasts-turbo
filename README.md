@@ -3,6 +3,7 @@
 
 Useful links:
 [Turbo Hotwire][1]
+[Turbo Events][2]
 
 ## Setup
 
@@ -38,4 +39,5 @@ yarn install
 ```
 
 [1]:https://turbo.hotwired.dev/
+[2]:https://turbo.hotwired.dev/reference/events
 

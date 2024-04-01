@@ -7,6 +7,17 @@ const TurboHelper = class {
             this.closeModal();
             this.closeSweetalert();
         })
+
+        // /* Weather widget fix var 1 */
+        // document.addEventListener('turbo:before-render', () => {
+        //     document.querySelector('#weatherwidget-io-js').remove();
+        // });
+
+
+        /* Weather widget fix var 2 */
+        document.addEventListener('turbo:render', () => {
+            this.initializeWeatherWidget();
+        });
     }
 
     closeModal() {
@@ -64,6 +75,10 @@ const TurboHelper = class {
                 }
             })
         }
+    }
+
+    initializeWeatherWidget() {
+        __weatherwidget_init();
     }
 }
 
