@@ -1,4 +1,5 @@
 import { Controller } from 'stimulus';
+import {visit} from "@hotwired/turbo";
 
 export default class extends Controller {
     count = 0;
@@ -7,5 +8,11 @@ export default class extends Controller {
     increment() {
         this.count++;
         this.countTarget.innerText = this.count;
+
+        if (this.count === 10) {
+            // window.location.href = '/you-won';
+            visit('/you-won');
+        }
+
     }
 }

@@ -97,5 +97,13 @@
                 }
             }(document, 'script', 'weatherwidget-io-js');
         </script>
+
+        {# Navigating with Turbo in a file that is not parsed by webpack (not in js file) such as inline js as below #}
+        <script>
+            document.getElementById('logo-img').addEventListener('click', (event) => {
+                event.preventDefault();
+                Turbo.visit('/cart');
+            });
+        </script>
     </body>
 </html>
