@@ -18,6 +18,8 @@ const TurboHelper = class {
         document.addEventListener('turbo:render', () => {
             this.initializeWeatherWidget();
         });
+
+       this.initializeTransitions();
     }
 
     closeModal() {
@@ -79,6 +81,52 @@ const TurboHelper = class {
 
     initializeWeatherWidget() {
         __weatherwidget_init();
+    }
+
+    isPreviewRendered() {
+        /* document.documentElement => get the html tag */
+        return document.documentElement.hasAttribute('data-turbo-preview');
+    }
+
+    initializeTransitions() {
+        /* Triggered after a visit starts */
+        document.addEventListener('turbo:visit', () => {
+            // Fade out the old page body
+            document.body.classList.add('turbo-loading');
+        })
+
+        /* Triggered BEFORE the new page body is added to the page */
+        document.addEventListener('turbo:before-render', (event) => {
+            if (this.isPreviewRendered()) {
+                event.detail.newBody.classList.remove('turbo-loading');
+                requestAnimationFrame(() => {
+                    event.detail.newBody.classList.add('turbo-loading');
+                });
+            } else {
+                const isRestoration = event.detail.newBody.classList.contains('turbo-loading');
+                if (isRestoration) {
+                    // this is a restoration (back button). Remove the class
+                    // so it simply starts with full opacity
+                    event.detail.newBody.classList.remove('turbo-loading');
+
+                    return;
+                }
+                // when we are about to render, start us faded out
+                // adds the css class 'turbo-loading' to the new body before its rendered to the page
+                event.detail.newBody.classList.add('turbo-loading');
+            }
+        })
+
+        // /* Triggered AFTER the new page body is added to the page */
+        document.addEventListener('turbo:render', () => {
+            if (!this.isPreviewRendered()) {
+                // after rendering, we first allow the turbo-loading class to instantly start the page at lower opacity
+                // THEN, one frame later, we remove the turbo-loading class, which allows the fade in
+                requestAnimationFrame(() => {
+                    document.body.classList.remove('turbo-loading');
+                });
+            }
+        })
     }
 }
 

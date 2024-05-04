@@ -4,8 +4,13 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
+    transition: opacity 200ms;
 }
 
+/*turbo-loading is not part of the turbo library we add it to cause the transition*/
+body.turbo-loading {
+    opacity: .8;
+}
 
 /* When using turbo snapshot, the class "data-turbo-preview" appears on the html tag briefly before the page is fully loaded (while the snapshot is loaded) */
 [data-turbo-preview] body {
