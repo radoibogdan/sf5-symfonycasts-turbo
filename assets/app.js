@@ -12,3 +12,6 @@ import './styles/app.css';
 import './bootstrap';
 
 import './turbo/turbo-helper';
+
+// Prefetch pages when hovering over a link or use the native browser prefetch (see cart.html.twig)
+import './turbo/prefetch'
