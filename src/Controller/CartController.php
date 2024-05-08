@@ -29,7 +29,10 @@ class CartController extends AbstractController
     }
 
 
-    public function _cartFeaturedProduct(ProductRepository  $productRepository): Response
+    /**
+     * @Route("/cart/_featured", name="_app_cart_product_featured")
+     */
+    public function _cartFeaturedProduct(Request $request, ProductRepository  $productRepository): Response
     {
         $featuredProduct = $productRepository->findFeatured();
         $addToCartForm = $this->createForm(AddItemToCartFormType::class, null, [
@@ -38,7 +41,8 @@ class CartController extends AbstractController
 
         return $this->renderForm('cart/_featuredSidebar.html.twig', [
             'featuredProduct' => $featuredProduct,
-            'addToCartForm' => $addToCartForm
+            'addToCartForm' => $addToCartForm,
+            'showFullDescription' => $request->query->get("show_description")
         ]);
     }
 
