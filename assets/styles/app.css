@@ -21,6 +21,23 @@ a, a:hover  {
     color: #000;
 }
 
+/* we do this because turbo custom element is rendered as inline, so the opacity has no effect on it*/
+turbo-frame {
+    display: block;
+}
+
+turbo-frame[busy] {
+    opacity: .5;
+}
+
+turbo-frame[busy] .frame-loading-hide, turbo-frame .frame-loading-show {
+    display: none;
+}
+
+turbo-frame[busy] .frame-loading-show {
+    display: inline-block;
+}
+
 h1 {
     font-size: 1.7rem;
 }

@@ -22,10 +22,12 @@
                 {{ featuredProduct.description | u.truncate(25) | trim }}...
 
                 <a
+                    class="frame-loading-hide"
                     data-turbo-frame="cart-sidebar"
                     href="{{ path('_app_cart_product_featured', {
                         show_description : true
                     }) }}">(read more)</a>
+                <span class="frame-loading-show fas fa-spinner fa-spin"></span>
             {% endif %}
 
             {{ include('product/_cart_add_controls.html.twig') }}

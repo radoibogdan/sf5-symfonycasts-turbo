@@ -21,15 +21,11 @@ class CheckoutController extends AbstractController
     /**
      * @Route("/checkout", name="app_checkout")
      */
-    public function checkout(ProductRepository $productRepository, Request $request, CartStorage $cartStorage, EntityManagerInterface $entityManager, SessionInterface $session): Response
+    public function checkout(Request $request, CartStorage $cartStorage, EntityManagerInterface $entityManager, SessionInterface $session): Response
     {
         $checkoutForm = $this->createForm(CheckoutFormType::class);
-        $featuredProduct = $productRepository->findFeatured();
-        $addToCartForm = $this->createForm(AddItemToCartFormType::class, null, [
-            'product' => $featuredProduct,
-        ]);
-
         $checkoutForm->handleRequest($request);
+
         if ($checkoutForm->isSubmitted() && $checkoutForm->isValid()) {
             /** @var Purchase $purchase */
             $purchase = $checkoutForm->getData();
@@ -46,8 +42,6 @@ class CheckoutController extends AbstractController
 
         return $this->renderForm('checkout/checkout.html.twig', [
             'checkoutForm' => $checkoutForm,
-            'featuredProduct' => $featuredProduct,
-            'addToCartForm' => $addToCartForm,
         ]);
     }
 
